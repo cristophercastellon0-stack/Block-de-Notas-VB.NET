@@ -43,6 +43,15 @@ Partial Class frmBlocNotas
         FormatoToolStripMenuItem = New ToolStripMenuItem()
         ArchivoToolStripMenuItem = New ToolStripMenuItem()
         mnuNuevo = New ToolStripMenuItem()
+        mnuAbrir = New ToolStripMenuItem()
+        mnuGuardar = New ToolStripMenuItem()
+        mnuGuardarComo = New ToolStripMenuItem()
+        mnuSalir = New ToolStripMenuItem()
+        mnuCortar = New ToolStripMenuItem()
+        mnuCopiar = New ToolStripMenuItem()
+        mnuPegar = New ToolStripMenuItem()
+        mnuFuente = New ToolStripMenuItem()
+        mnuAjusteLinea = New ToolStripMenuItem()
         MnuPrincipal.SuspendLayout()
         cmsTexto.SuspendLayout()
         SuspendLayout()
@@ -154,19 +163,21 @@ Partial Class frmBlocNotas
         ' 
         ' EdicionToolStripMenuItem
         ' 
+        EdicionToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {mnuCortar, mnuCopiar, mnuPegar})
         EdicionToolStripMenuItem.Name = "EdicionToolStripMenuItem"
         EdicionToolStripMenuItem.Size = New Size(72, 24)
         EdicionToolStripMenuItem.Text = "Edicion"
         ' 
         ' FormatoToolStripMenuItem
         ' 
+        FormatoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {mnuFuente, mnuAjusteLinea})
         FormatoToolStripMenuItem.Name = "FormatoToolStripMenuItem"
         FormatoToolStripMenuItem.Size = New Size(79, 24)
         FormatoToolStripMenuItem.Text = "Formato"
         ' 
         ' ArchivoToolStripMenuItem
         ' 
-        ArchivoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {mnuNuevo})
+        ArchivoToolStripMenuItem.DropDownItems.AddRange(New ToolStripItem() {mnuNuevo, mnuAbrir, mnuGuardar, mnuGuardarComo, mnuSalir})
         ArchivoToolStripMenuItem.Name = "ArchivoToolStripMenuItem"
         ArchivoToolStripMenuItem.Size = New Size(73, 24)
         ArchivoToolStripMenuItem.Text = "Archivo"
@@ -177,6 +188,67 @@ Partial Class frmBlocNotas
         mnuNuevo.ShortcutKeys = Keys.Control Or Keys.N
         mnuNuevo.Size = New Size(224, 26)
         mnuNuevo.Text = "&Nuevo"
+        ' 
+        ' mnuAbrir
+        ' 
+        mnuAbrir.Name = "mnuAbrir"
+        mnuAbrir.ShortcutKeys = Keys.Control Or Keys.O
+        mnuAbrir.Size = New Size(224, 26)
+        mnuAbrir.Text = "&Abrir"
+        ' 
+        ' mnuGuardar
+        ' 
+        mnuGuardar.Name = "mnuGuardar"
+        mnuGuardar.ShortcutKeys = Keys.Control Or Keys.S
+        mnuGuardar.Size = New Size(224, 26)
+        mnuGuardar.Text = "&Guardar"
+        ' 
+        ' mnuGuardarComo
+        ' 
+        mnuGuardarComo.Name = "mnuGuardarComo"
+        mnuGuardarComo.Size = New Size(224, 26)
+        mnuGuardarComo.Text = "Guardar &como..."
+        ' 
+        ' mnuSalir
+        ' 
+        mnuSalir.Name = "mnuSalir"
+        mnuSalir.ShortcutKeys = Keys.Alt Or Keys.F4
+        mnuSalir.Size = New Size(224, 26)
+        mnuSalir.Text = "&Salir"
+        ' 
+        ' mnuCortar
+        ' 
+        mnuCortar.Name = "mnuCortar"
+        mnuCortar.ShortcutKeys = Keys.Control Or Keys.X
+        mnuCortar.Size = New Size(224, 26)
+        mnuCortar.Text = "Cortar"
+        ' 
+        ' mnuCopiar
+        ' 
+        mnuCopiar.Name = "mnuCopiar"
+        mnuCopiar.ShortcutKeys = Keys.Control Or Keys.X
+        mnuCopiar.Size = New Size(224, 26)
+        mnuCopiar.Text = "Copiar"
+        ' 
+        ' mnuPegar
+        ' 
+        mnuPegar.Name = "mnuPegar"
+        mnuPegar.ShortcutKeys = Keys.Control Or Keys.X
+        mnuPegar.Size = New Size(224, 26)
+        mnuPegar.Text = "Pegar"
+        ' 
+        ' mnuFuente
+        ' 
+        mnuFuente.Name = "mnuFuente"
+        mnuFuente.Size = New Size(224, 26)
+        mnuFuente.Text = "&Fuente..."
+        ' 
+        ' mnuAjusteLinea
+        ' 
+        mnuAjusteLinea.CheckOnClick = True
+        mnuAjusteLinea.Name = "mnuAjusteLinea"
+        mnuAjusteLinea.Size = New Size(224, 26)
+        mnuAjusteLinea.Text = "Ajuste de línea"
         ' 
         ' frmBlocNotas
         ' 
@@ -219,5 +291,14 @@ Partial Class frmBlocNotas
     Friend WithEvents EdicionToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents AyudaToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents mnuNuevo As ToolStripMenuItem
+    Friend WithEvents mnuAbrir As ToolStripMenuItem
+    Friend WithEvents mnuGuardar As ToolStripMenuItem
+    Friend WithEvents mnuGuardarComo As ToolStripMenuItem
+    Friend WithEvents mnuSalir As ToolStripMenuItem
+    Friend WithEvents mnuFuente As ToolStripMenuItem
+    Friend WithEvents mnuAjusteLinea As ToolStripMenuItem
+    Friend WithEvents mnuCortar As ToolStripMenuItem
+    Friend WithEvents mnuCopiar As ToolStripMenuItem
+    Friend WithEvents mnuPegar As ToolStripMenuItem
 
 End Class
