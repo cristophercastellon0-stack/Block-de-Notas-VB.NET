@@ -28,7 +28,8 @@ Namespace My
 
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Form1
+            ' Establecer la ventana principal a la clase frmBlocNotas (nombre usado en el diseñador)
+            Me.MainForm = New frmBlocNotas()
         End Sub
     End Class
 End Namespace
