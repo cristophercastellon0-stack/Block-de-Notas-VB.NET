@@ -2,7 +2,6 @@
 Imports System.Drawing
 
 Public Class frmBlocNotas
-
     Private rutaActual As String = String.Empty
     Private documentoModificado As Boolean = False
 
@@ -43,6 +42,8 @@ Public Class frmBlocNotas
         tscbTamano.Items.AddRange(New String() {"8", "10", "11", "12", "14", "18", "24"})
         tscbTamano.SelectedIndex = 2
 
+        ' Añadir entrada dinámica "Acerca de..." al menú Ayuda si existe
+
         ActualizarBarraEstado()
         Me.Text = "Bloc de Notas VB.NET - [Nuevo documento]"
     End Sub
@@ -57,6 +58,7 @@ Public Class frmBlocNotas
     End Sub
 
     ' Operaciones básicas: Nuevo, Abrir y Guardar
+
     Private Sub NuevoDocumento()
         If documentoModificado Then
             ' Si hay cambios, simplemente reiniciamos (el diálogo de guardado puede añadirse después)
@@ -142,6 +144,22 @@ Public Class frmBlocNotas
         rtbDocumento.Copy()
     End Sub
 
+    Private Sub mnuDeshacer_Click(sender As Object, e As EventArgs) Handles mnuDeshacer.Click
+        If rtbDocumento.CanUndo Then
+            rtbDocumento.Undo()
+            documentoModificado = True
+            ActualizarBarraEstado()
+        End If
+    End Sub
+
+    Private Sub mnuRehacer_Click(sender As Object, e As EventArgs) Handles mnuRehacer.Click
+        If rtbDocumento.CanRedo Then
+            rtbDocumento.Redo()
+            documentoModificado = True
+            ActualizarBarraEstado()
+        End If
+    End Sub
+
     Private Sub mnuPegar_Click(sender As Object, e As EventArgs) Handles mnuPegar.Click
         rtbDocumento.Paste()
     End Sub
@@ -189,13 +207,13 @@ Public Class frmBlocNotas
         NuevoDocumento()
     End Sub
 
-Private Sub tsbAbrir_Click(sender As Object, e As EventArgs) Handles tsbAbrir.Click
-    AbrirDocumento()
-End Sub
+    Private Sub tsbAbrir_Click(sender As Object, e As EventArgs) Handles tsbAbrir.Click
+        AbrirDocumento()
+    End Sub
 
-Private Sub tsbGuardar_Click(sender As Object, e As EventArgs) Handles tsbGuardar.Click
-    GuardarDocumento(False)
-End Sub
+    Private Sub tsbGuardar_Click(sender As Object, e As EventArgs) Handles tsbGuardar.Click
+        GuardarDocumento(False)
+    End Sub
 
 
 
@@ -269,4 +287,93 @@ End Sub
         stsFechaHora.Text = DateTime.Now.ToString("dd/MM/yyyy  HH:mm:ss")
     End Sub
 
+    Private Sub frmBlocNotas_FormClosing(sender As Object, e As FormClosingEventArgs) Handles MyBase.FormClosing
+        If documentoModificado Then
+
+            Dim respuesta As DialogResult
+
+            respuesta = MessageBox.Show(
+                "El documento ha sido modificado. ¿Desea guardar los cambios?",
+                "Guardar cambios",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question)
+
+            If respuesta = DialogResult.Yes Then
+
+                GuardarDocumento(False)
+                documentoModificado = False
+
+            ElseIf respuesta = DialogResult.Cancel Then
+
+                e.Cancel = True
+
+            End If
+
+        End If
+    End Sub
+
+    Private Sub mnuBuscar_Click(sender As Object, e As EventArgs) Handles mnuBuscar.Click
+        Dim textoBuscado As String = InputBox("Escriba el texto que desea buscar:", "Buscar")
+
+        If textoBuscado <> "" Then
+            Dim posicion As Integer = rtbDocumento.Find(textoBuscado)
+            If posicion >= 0 Then
+                rtbDocumento.Select(posicion, textoBuscado.Length)
+                rtbDocumento.Focus()
+            End If
+
+            If posicion = -1 Then
+                MessageBox.Show("Texto no encontrado.", "Buscar",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information)
+            End If
+        End If
+    End Sub
+
+    Private Sub mnuColordetexto_Click(sender As Object, e As EventArgs) Handles mnuColordetexto.Click
+        If rtbDocumento.SelectionLength > 0 Then
+            If dlgColor.ShowDialog() = DialogResult.OK Then
+                rtbDocumento.SelectionColor = dlgColor.Color
+            End If
+        Else
+            MessageBox.Show("Seleccione el texto al que desea cambiar el color.",
+                            "Color del texto",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information)
+        End If
+    End Sub
+    Private Sub ContarPalabras()
+        Dim texto As String = rtbDocumento.Text.Trim()
+
+        If texto = "" Then
+            MessageBox.Show("El documento no contiene palabras.", "Contar palabras",
+                            MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim palabras() As String = texto.Split(
+            New Char() {" "c, ChrW(10), ChrW(13), ChrW(9)},
+            StringSplitOptions.RemoveEmptyEntries)
+
+        MessageBox.Show("Cantidad de palabras: " & palabras.Length,
+                        "Contar palabras",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information)
+    End Sub
+
+    Private Sub mnuContarPalabras_Click(sender As Object, e As EventArgs)
+        ContarPalabras()
+    End Sub
+
+    Private Sub AyudaToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AyudaToolStripMenuItem.Click
+
+        MessageBox.Show(
+            "Bloc de Notas VB.NET" & vbCrLf &
+            "Editor de texto desarrollado en VB.NET." & vbCrLf &
+            "Proyecto de Programación.",
+            "Acerca de...",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information)
+
+    End Sub
 End Class
