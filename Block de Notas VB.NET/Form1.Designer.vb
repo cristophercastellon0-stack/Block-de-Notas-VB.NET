@@ -220,13 +220,13 @@ Partial Class frmBlocNotas
         ' mnuBuscar
         ' 
         mnuBuscar.Name = "mnuBuscar"
-        mnuBuscar.Size = New Size(195, 26)
+        mnuBuscar.Size = New Size(224, 26)
         mnuBuscar.Text = "Buscar"
         ' 
         ' mnuContarPalabras
         ' 
         mnuContarPalabras.Name = "mnuContarPalabras"
-        mnuContarPalabras.Size = New Size(195, 26)
+        mnuContarPalabras.Size = New Size(224, 26)
         mnuContarPalabras.Text = "Contar Palabras"
         ' 
         ' tsPrincipal
