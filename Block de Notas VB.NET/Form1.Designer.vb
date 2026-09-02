@@ -45,6 +45,7 @@ Partial Class frmBlocNotas
         AyudaToolStripMenuItem = New ToolStripMenuItem()
         HerramientasToolStripMenuItem = New ToolStripMenuItem()
         mnuBuscar = New ToolStripMenuItem()
+        mnuContarPalabras = New ToolStripMenuItem()
         tsPrincipal = New ToolStrip()
         tsbNuevo = New ToolStripButton()
         tsbAbrir = New ToolStripButton()
@@ -53,7 +54,7 @@ Partial Class frmBlocNotas
         tsbCursiva = New ToolStripButton()
         tsbSubrayado = New ToolStripButton()
         tscbFuente = New ToolStripComboBox()
-        tscbTamano = New ToolStripComboBox()
+        tscbTamaño = New ToolStripComboBox()
         rtbDocumento = New RichTextBox()
         cmsTexto = New ContextMenuStrip(components)
         CortarToolStripMenuItem = New ToolStripMenuItem()
@@ -71,7 +72,6 @@ Partial Class frmBlocNotas
         dlgFuentes = New FontDialog()
         dlgColor = New ColorDialog()
         tmrReloj = New Timer(components)
-        mnuContarPalabras = New ToolStripMenuItem()
         MnuPrincipal.SuspendLayout()
         tsPrincipal.SuspendLayout()
         cmsTexto.SuspendLayout()
@@ -220,14 +220,20 @@ Partial Class frmBlocNotas
         ' mnuBuscar
         ' 
         mnuBuscar.Name = "mnuBuscar"
-        mnuBuscar.Size = New Size(224, 26)
+        mnuBuscar.Size = New Size(195, 26)
         mnuBuscar.Text = "Buscar"
+        ' 
+        ' mnuContarPalabras
+        ' 
+        mnuContarPalabras.Name = "mnuContarPalabras"
+        mnuContarPalabras.Size = New Size(195, 26)
+        mnuContarPalabras.Text = "Contar Palabras"
         ' 
         ' tsPrincipal
         ' 
         tsPrincipal.GripStyle = ToolStripGripStyle.Hidden
         tsPrincipal.ImageScalingSize = New Size(20, 20)
-        tsPrincipal.Items.AddRange(New ToolStripItem() {tsbNuevo, tsbAbrir, tsbGuardar, tsbNegrita, tsbCursiva, tsbSubrayado, tscbFuente, tscbTamano})
+        tsPrincipal.Items.AddRange(New ToolStripItem() {tsbNuevo, tsbAbrir, tsbGuardar, tsbNegrita, tsbCursiva, tsbSubrayado, tscbFuente, tscbTamaño})
         tsPrincipal.Location = New Point(0, 28)
         tsPrincipal.Name = "tsPrincipal"
         tsPrincipal.Size = New Size(800, 28)
@@ -241,7 +247,7 @@ Partial Class frmBlocNotas
         tsbNuevo.ImageTransparentColor = Color.Magenta
         tsbNuevo.Name = "tsbNuevo"
         tsbNuevo.Size = New Size(29, 25)
-        tsbNuevo.Text = "ToolStripButton1"
+        tsbNuevo.Text = "Nuevo"
         ' 
         ' tsbAbrir
         ' 
@@ -250,7 +256,7 @@ Partial Class frmBlocNotas
         tsbAbrir.ImageTransparentColor = Color.Magenta
         tsbAbrir.Name = "tsbAbrir"
         tsbAbrir.Size = New Size(29, 25)
-        tsbAbrir.Text = "ToolStripButton2"
+        tsbAbrir.Text = "Abrir"
         ' 
         ' tsbGuardar
         ' 
@@ -259,7 +265,7 @@ Partial Class frmBlocNotas
         tsbGuardar.ImageTransparentColor = Color.Magenta
         tsbGuardar.Name = "tsbGuardar"
         tsbGuardar.Size = New Size(29, 25)
-        tsbGuardar.Text = "ToolStripButton3"
+        tsbGuardar.Text = "Guardar"
         ' 
         ' tsbNegrita
         ' 
@@ -269,7 +275,7 @@ Partial Class frmBlocNotas
         tsbNegrita.ImageTransparentColor = Color.Magenta
         tsbNegrita.Name = "tsbNegrita"
         tsbNegrita.Size = New Size(29, 25)
-        tsbNegrita.Text = "ToolStripButton1"
+        tsbNegrita.Text = "Negrita"
         ' 
         ' tsbCursiva
         ' 
@@ -279,7 +285,7 @@ Partial Class frmBlocNotas
         tsbCursiva.ImageTransparentColor = Color.Magenta
         tsbCursiva.Name = "tsbCursiva"
         tsbCursiva.Size = New Size(29, 25)
-        tsbCursiva.Text = "ToolStripButton2"
+        tsbCursiva.Text = "Cursiva"
         ' 
         ' tsbSubrayado
         ' 
@@ -289,17 +295,19 @@ Partial Class frmBlocNotas
         tsbSubrayado.ImageTransparentColor = Color.Magenta
         tsbSubrayado.Name = "tsbSubrayado"
         tsbSubrayado.Size = New Size(29, 25)
-        tsbSubrayado.Text = "ToolStripButton3"
+        tsbSubrayado.Text = "Subrayado"
         ' 
         ' tscbFuente
         ' 
         tscbFuente.Name = "tscbFuente"
         tscbFuente.Size = New Size(121, 28)
+        tscbFuente.Text = "Fuente"
         ' 
-        ' tscbTamano
+        ' tscbTamaño
         ' 
-        tscbTamano.Name = "tscbTamano"
-        tscbTamano.Size = New Size(121, 28)
+        tscbTamaño.Name = "tscbTamaño"
+        tscbTamaño.Size = New Size(121, 28)
+        tscbTamaño.Text = "Tamaño"
         ' 
         ' rtbDocumento
         ' 
@@ -406,12 +414,6 @@ Partial Class frmBlocNotas
         tmrReloj.Enabled = True
         tmrReloj.Interval = 1000
         ' 
-        ' mnuContarPalabras
-        ' 
-        mnuContarPalabras.Name = "mnuContarPalabras"
-        mnuContarPalabras.Size = New Size(224, 26)
-        mnuContarPalabras.Text = "Contar Palabras"
-        ' 
         ' frmBlocNotas
         ' 
         AutoScaleDimensions = New SizeF(8F, 20F)
@@ -473,7 +475,7 @@ Partial Class frmBlocNotas
     Friend WithEvents tsbCursiva As ToolStripButton
     Friend WithEvents tsbSubrayado As ToolStripButton
     Friend WithEvents tscbFuente As ToolStripComboBox
-    Friend WithEvents tscbTamano As ToolStripComboBox
+    Friend WithEvents tscbTamaño As ToolStripComboBox
     Friend WithEvents stsEstado As ToolStripStatusLabel
     Friend WithEvents stsPosicion As ToolStripStatusLabel
     Friend WithEvents stsCaracteres As ToolStripStatusLabel
